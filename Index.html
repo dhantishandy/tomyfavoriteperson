@@ -1,0 +1,2243 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff0f5">
+  <title>A Little Book of Us — For Dedeee</title>
+
+  <!-- =====================================================
+       BAGIAN 1 — FONT DAN DESAIN UTAMA
+       ===================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink: #ffb8d2;
+      --pink-light: #fff0f5;
+      --pink-dark: #ef7da9;
+      --white: #fffdfd;
+      --black: #28202a;
+      --gold: #d8ad59;
+      --cream: #fff9f0;
+      --muted: #8c7887;
+      --line: #f0d7e2;
+      --shadow: 0 12px 35px rgba(120, 65, 94, .12);
+      --pixel: "Press Start 2P", monospace;
+      --body: "Nunito", sans-serif;
+      --serif: "Playfair Display", serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--black);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255,184,210,.35), transparent 28%),
+        radial-gradient(circle at 88% 78%, rgba(216,173,89,.12), transparent 28%),
+        var(--pink-light);
+      font-family: var(--body);
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    input:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .screen {
+      display: none;
+      min-height: 100svh;
+      padding: 30px 20px 48px;
+      position: relative;
+      animation: screenIn .55s ease both;
+    }
+
+    .screen.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .wrap {
+      width: min(100%, 920px);
+      margin: auto;
+    }
+
+    .pixel {
+      font-family: var(--pixel);
+      line-height: 1.8;
+    }
+
+    .eyebrow {
+      font-family: var(--pixel);
+      color: var(--pink-dark);
+      font-size: 9px;
+      line-height: 1.9;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .serif {
+      font-family: var(--serif);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .gold-line {
+      width: 72px;
+      height: 3px;
+      background: var(--gold);
+      margin: 18px auto;
+      border-radius: 5px;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 14px 22px;
+      border: 2px solid var(--black);
+      border-radius: 8px;
+      background: var(--black);
+      color: white;
+      font-weight: 900;
+      letter-spacing: .2px;
+      box-shadow: 4px 4px 0 var(--pink);
+      transition: transform .18s, box-shadow .18s;
+    }
+
+    .btn:hover {
+      transform: translate(-2px,-2px);
+      box-shadow: 6px 6px 0 var(--pink);
+    }
+
+    .btn:active {
+      transform: translate(2px,2px);
+      box-shadow: 1px 1px 0 var(--pink);
+    }
+
+    .btn.light {
+      background: white;
+      color: var(--black);
+      border-color: var(--black);
+      box-shadow: 4px 4px 0 #e7c4d3;
+    }
+
+    .btn.gold {
+      background: var(--gold);
+      color: #332617;
+      border-color: #332617;
+      box-shadow: 4px 4px 0 #f1dcae;
+    }
+
+    .btn.small {
+      min-height: 38px;
+      padding: 9px 14px;
+      font-size: 13px;
+    }
+
+    .topbar {
+      position: fixed;
+      z-index: 50;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 18px;
+      background: rgba(255,253,253,.87);
+      border-bottom: 1px solid rgba(240,215,226,.8);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      font-family: var(--pixel);
+      font-size: 8px;
+      line-height: 1.8;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 9px;
+      padding: 9px 11px;
+      font-weight: 800;
+      color: var(--black);
+    }
+
+    .screen.has-topbar {
+      padding-top: 100px;
+    }
+
+    /* =====================================================
+       BAGIAN 2 — PIXEL ART DAN KARAKTER BUKU AJAIB
+       ===================================================== */
+
+    .pixel-stage {
+      width: min(100%, 400px);
+      margin: 20px auto 28px;
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .pixel-stage::before {
+      content: "";
+      position: absolute;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      background: rgba(255,184,210,.36);
+      filter: blur(2px);
+      z-index: -1;
+    }
+
+    .pixel-star {
+      position: absolute;
+      font-size: 23px;
+      color: var(--gold);
+      animation: twinkle 2s infinite alternate;
+    }
+
+    .star-a { top: 15%; left: 12%; }
+    .star-b { top: 20%; right: 12%; animation-delay: .6s; }
+    .star-c { bottom: 14%; left: 19%; animation-delay: .3s; }
+    .star-d { bottom: 18%; right: 18%; animation-delay: .9s; }
+
+    .book-character {
+      width: 180px;
+      height: 155px;
+      position: relative;
+      filter: drop-shadow(7px 10px 0 rgba(80,37,62,.12));
+      animation: floatBook 3s ease-in-out infinite;
+      image-rendering: pixelated;
+    }
+
+    .book-shadow {
+      position: absolute;
+      width: 140px;
+      height: 16px;
+      left: 20px;
+      bottom: 1px;
+      background: rgba(90,48,72,.13);
+      border-radius: 50%;
+      animation: shadowPulse 3s ease-in-out infinite;
+    }
+
+    .book-left,
+    .book-right {
+      position: absolute;
+      top: 22px;
+      width: 84px;
+      height: 102px;
+      border: 5px solid var(--black);
+      background: #fff9f1;
+    }
+
+    .book-left {
+      left: 7px;
+      transform: skewY(5deg);
+      border-radius: 6px 0 0 7px;
+      box-shadow: inset 8px 0 #f4d6e3;
+    }
+
+    .book-right {
+      right: 7px;
+      transform: skewY(-5deg);
+      border-radius: 0 6px 7px 0;
+      background: #ffcfdf;
+      box-shadow: inset -8px 0 #f5a9c7;
+    }
+
+    .book-spine {
+      position: absolute;
+      top: 20px;
+      left: 86px;
+      width: 9px;
+      height: 108px;
+      z-index: 3;
+      background: var(--gold);
+      border: 3px solid var(--black);
+    }
+
+    .book-eye {
+      position: absolute;
+      width: 9px;
+      height: 13px;
+      top: 58px;
+      background: var(--black);
+      z-index: 4;
+    }
+
+    .book-eye.left { left: 52px; }
+    .book-eye.right { right: 48px; }
+
+    .book-mouth {
+      position: absolute;
+      top: 78px;
+      left: 80px;
+      z-index: 4;
+      width: 18px;
+      height: 8px;
+      border-bottom: 4px solid var(--black);
+      border-radius: 0 0 50% 50%;
+    }
+
+    .book-cheek {
+      position: absolute;
+      top: 76px;
+      z-index: 4;
+      width: 13px;
+      height: 7px;
+      background: #ed83a8;
+      opacity: .8;
+    }
+
+    .book-cheek.left { left: 35px; }
+    .book-cheek.right { right: 31px; }
+
+    .book-crown {
+      position: absolute;
+      top: 0;
+      left: 66px;
+      z-index: 6;
+      font-size: 29px;
+      transform: rotate(-12deg);
+    }
+
+    .book-arm {
+      position: absolute;
+      top: 78px;
+      z-index: -1;
+      width: 28px;
+      height: 9px;
+      border: 4px solid var(--black);
+      background: var(--pink);
+    }
+
+    .book-arm.left { left: -10px; transform: rotate(25deg); }
+    .book-arm.right { right: -10px; transform: rotate(-25deg); }
+
+    .character-bubble {
+      max-width: 330px;
+      padding: 12px 15px;
+      margin: -5px auto 22px;
+      background: white;
+      border: 2px solid var(--black);
+      border-radius: 12px;
+      box-shadow: 4px 4px 0 var(--pink);
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+      position: relative;
+    }
+
+    .character-bubble::before {
+      content: "";
+      position: absolute;
+      top: -8px;
+      left: calc(50% - 6px);
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-top: 2px solid var(--black);
+      border-left: 2px solid var(--black);
+      transform: rotate(45deg);
+    }
+
+    /* =====================================================
+       BAGIAN 3 — HOME / PEMBUKA
+       ===================================================== */
+
+    #home {
+      justify-content: center;
+      padding-top: 78px;
+      padding-bottom: 35px;
+      text-align: center;
+    }
+
+    .home-title {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: clamp(40px, 8vw, 76px);
+      letter-spacing: -2px;
+      line-height: 1.04;
+    }
+
+    .home-title em {
+      color: var(--pink-dark);
+      font-weight: 500;
+    }
+
+    .home-subtitle {
+      margin: 17px auto 0;
+      max-width: 460px;
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .tiny-label {
+      display: inline-block;
+      border: 1px solid #e8c3d4;
+      background: rgba(255,255,255,.7);
+      padding: 9px 13px;
+      border-radius: 99px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .home-footer {
+      margin-top: 30px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* =====================================================
+       BAGIAN 4 — INTRODUCTION / CERITA
+       ===================================================== */
+
+    .section-heading {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 32px;
+    }
+
+    .section-heading h2 {
+      font-family: var(--serif);
+      font-size: clamp(34px, 6vw, 54px);
+      line-height: 1.15;
+      margin: 10px 0;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .story-card {
+      background: rgba(255,253,253,.92);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: clamp(22px, 5vw, 38px);
+      box-shadow: var(--shadow);
+      margin-bottom: 22px;
+    }
+
+    .story-card p {
+      font-size: 15px;
+      line-height: 2;
+      margin: 0 0 16px;
+    }
+
+    .story-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .handwritten {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 20px !important;
+      color: #b85f86;
+      line-height: 1.8 !important;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin: 28px 0;
+      align-items: start;
+    }
+
+    .polaroid {
+      padding: 9px 9px 18px;
+      background: #fff;
+      box-shadow: 0 6px 22px rgba(87,51,69,.12);
+      border: 1px solid #f1e7eb;
+      transform: rotate(-2deg);
+      transition: transform .25s;
+    }
+
+    .polaroid:nth-child(2n) {
+      transform: rotate(2.4deg) translateY(16px);
+    }
+
+    .polaroid:nth-child(3n) {
+      transform: rotate(-1deg) translateY(5px);
+    }
+
+    .polaroid:hover {
+      transform: rotate(0) translateY(-5px);
+    }
+
+    .polaroid img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      background: #f7e7ed;
+      cursor: zoom-in;
+    }
+
+    .polaroid figcaption {
+      padding-top: 12px;
+      text-align: center;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 13px;
+      color: #7d5668;
+    }
+
+    .story-next {
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+    }
+
+    /* =====================================================
+       BAGIAN 5 — QUIZ INTERAKTIF
+       ===================================================== */
+
+    .quiz-shell {
+      width: min(100%, 690px);
+      margin: auto;
+    }
+
+    .quiz-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--muted);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      background: #f0dce5;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 26px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--pink-dark), var(--gold));
+      border-radius: 20px;
+      transition: width .3s;
+    }
+
+    .quiz-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: clamp(22px, 5vw, 38px);
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-card h2 {
+      font-family: var(--serif);
+      font-size: clamp(25px, 5vw, 36px);
+      line-height: 1.3;
+      margin: 14px 0 12px;
+    }
+
+    .quiz-hint {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .answer-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .answer-btn {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      width: 100%;
+      text-align: left;
+      padding: 15px;
+      border: 1.5px solid #ecd9e2;
+      border-radius: 12px;
+      background: #fffafd;
+      color: var(--black);
+      font-weight: 800;
+      transition: .2s;
+    }
+
+    .answer-btn:hover:not(:disabled) {
+      background: var(--pink-light);
+      border-color: var(--pink-dark);
+      transform: translateX(3px);
+    }
+
+    .answer-letter {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
+      border: 1px solid #e9cad8;
+      background: white;
+      border-radius: 8px;
+      font-family: var(--pixel);
+      font-size: 9px;
+    }
+
+    .answer-btn.correct {
+      background: #eff9ef;
+      border-color: #76b780;
+    }
+
+    .answer-btn.wrong {
+      background: #fff0f2;
+      border-color: #df8294;
+    }
+
+    .quiz-feedback {
+      min-height: 55px;
+      margin: 18px 0 6px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #fff4f8;
+      font-size: 13px;
+      line-height: 1.8;
+      font-weight: 800;
+    }
+
+    .quiz-controls {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 15px;
+    }
+
+    /* =====================================================
+       BAGIAN 6 — HASIL KUIS
+       ===================================================== */
+
+    .result-card {
+      width: min(100%, 650px);
+      margin: auto;
+      padding: clamp(24px, 6vw, 44px);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .result-number {
+      font-family: var(--serif);
+      font-size: clamp(65px, 12vw, 100px);
+      line-height: 1.1;
+      color: var(--pink-dark);
+      margin: 10px 0;
+    }
+
+    .result-message {
+      line-height: 1.9;
+      color: var(--muted);
+      margin: 12px auto 25px;
+      max-width: 460px;
+    }
+
+    /* =====================================================
+       BAGIAN 7 — GIFT REVEAL / VOUCHER BUKU
+       ===================================================== */
+
+    .gift-card {
+      width: min(100%, 680px);
+      margin: auto;
+      overflow: hidden;
+      background: var(--white);
+      border: 2px solid var(--black);
+      border-radius: 8px;
+      box-shadow: 8px 8px 0 var(--pink), var(--shadow);
+    }
+
+    .gift-banner {
+      padding: 26px 20px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,.6) 0 3px, transparent 4px),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,.55) 0 4px, transparent 5px),
+        var(--pink);
+      border-bottom: 2px dashed #d986a9;
+    }
+
+    .gift-banner .pixel {
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .gift-body {
+      padding: clamp(22px, 6vw, 44px);
+      text-align: center;
+    }
+
+    .gift-title {
+      font-family: var(--serif);
+      font-size: clamp(34px, 7vw, 54px);
+      line-height: 1.12;
+      margin: 12px 0;
+    }
+
+    .voucher {
+      border: 1px dashed var(--gold);
+      background: var(--cream);
+      padding: 22px;
+      margin: 24px 0;
+      border-radius: 12px;
+    }
+
+    .voucher-code {
+      font-family: var(--pixel);
+      font-size: clamp(13px, 3vw, 18px);
+      letter-spacing: 2px;
+      color: #85601f;
+      overflow-wrap: anywhere;
+    }
+
+    .gift-note {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.8;
+      color: #8b5a72;
+    }
+
+    /* =====================================================
+       BAGIAN 8 — FINALE / PENUTUP
+       ===================================================== */
+
+    .finale-card {
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .finale-title {
+      font-family: var(--serif);
+      font-size: clamp(42px, 9vw, 76px);
+      line-height: 1.06;
+      margin: 14px 0 22px;
+    }
+
+    .finale-text {
+      max-width: 570px;
+      margin: auto;
+      line-height: 2;
+      color: #715e6a;
+      font-size: 15px;
+    }
+
+    .finale-signature {
+      margin: 28px 0;
+      font-family: var(--serif);
+      font-size: 25px;
+      font-style: italic;
+      color: var(--pink-dark);
+    }
+
+    .footer-note {
+      font-size: 10px;
+      color: #9b8793;
+      margin-top: 30px;
+      line-height: 1.8;
+    }
+
+    /* =====================================================
+       BAGIAN 9 — MODAL FOTO DAN PASSWORD
+       ===================================================== */
+
+    .modal {
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      padding: 20px;
+      background: rgba(35,24,34,.78);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-box {
+      width: min(100%, 420px);
+      padding: 28px;
+      background: white;
+      border: 2px solid var(--black);
+      border-radius: 14px;
+      box-shadow: 6px 6px 0 var(--pink);
+      text-align: center;
+    }
+
+    .modal-box input {
+      width: 100%;
+      padding: 13px 14px;
+      margin: 14px 0;
+      border: 1px solid #e6cbd7;
+      border-radius: 9px;
+      text-align: center;
+      letter-spacing: 3px;
+      background: #fffafd;
+    }
+
+    .modal-error {
+      color: #b84260;
+      font-size: 12px;
+      min-height: 20px;
+    }
+
+    .photo-modal-content {
+      width: min(100%, 650px);
+      text-align: center;
+    }
+
+    .photo-modal-content img {
+      max-width: 100%;
+      max-height: 75svh;
+      object-fit: contain;
+      border: 8px solid white;
+      box-shadow: 0 15px 40px #0005;
+    }
+
+    .photo-close {
+      display: block;
+      margin: 18px auto 0;
+    }
+
+    /* =====================================================
+       BAGIAN 10 — EFEK ANIMASI
+       ===================================================== */
+
+    .sparkle {
+      position: fixed;
+      z-index: 0;
+      pointer-events: none;
+      opacity: .7;
+      animation: driftUp linear forwards;
+    }
+
+    .confetti {
+      position: fixed;
+      z-index: 90;
+      top: -20px;
+      pointer-events: none;
+      animation: confettiFall 3.5s linear forwards;
+    }
+
+    @keyframes screenIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatBook {
+      0%,100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-10px) rotate(2deg); }
+    }
+
+    @keyframes shadowPulse {
+      0%,100% { transform: scaleX(1); opacity: .65; }
+      50% { transform: scaleX(.8); opacity: .3; }
+    }
+
+    @keyframes twinkle {
+      from { transform: scale(.8) rotate(-10deg); opacity: .55; }
+      to { transform: scale(1.2) rotate(12deg); opacity: 1; }
+    }
+
+    @keyframes driftUp {
+      from { transform: translateY(20px); opacity: 0; }
+      20% { opacity: .7; }
+      to { transform: translateY(-110vh); opacity: 0; }
+    }
+
+    @keyframes confettiFall {
+      to { transform: translateY(110vh) rotate(720deg); opacity: .2; }
+    }
+
+    @media (max-width: 600px) {
+      .screen { padding: 24px 16px 35px; }
+      .screen.has-topbar { padding-top: 88px; }
+      .topbar { padding: 10px 12px; }
+      .brand { font-size: 7px; }
+      .icon-btn { padding: 8px; font-size: 11px; }
+      .pixel-stage { min-height: 225px; }
+      .book-character { transform: scale(.9); }
+      .photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+      .polaroid:nth-child(3n) { transform: rotate(-1deg); }
+      .story-card p { font-size: 14px; }
+      .quiz-top { font-size: 10px; }
+      .answer-btn { padding: 12px; font-size: 13px; }
+      .voucher { padding: 16px 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    /* =====================================================
+       BAGIAN 1B — UI/UX POLISH TERINSPIRASI REFERENSI PIXO
+       Tema A Little Book of Us tetap romantis, pixel-art,
+       pink/putih/hitam; ini hanya penyempurnaan tampilannya.
+       ===================================================== */
+    body {
+      background-color: var(--pink-light);
+      background-image:
+        linear-gradient(rgba(239,125,169,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(239,125,169,.055) 1px, transparent 1px),
+        radial-gradient(circle at 50% 20%, rgba(255,255,255,.96), transparent 42%),
+        radial-gradient(circle at 10% 75%, rgba(255,184,210,.35), transparent 30%),
+        radial-gradient(circle at 90% 72%, rgba(216,173,89,.10), transparent 26%);
+      background-size: 18px 18px, 18px 18px, auto, auto, auto;
+    }
+
+    .topbar {
+      background: rgba(255,253,253,.94);
+      border-bottom: 2px solid var(--black);
+      box-shadow: 0 3px 0 rgba(239,125,169,.35);
+    }
+
+    .brand {
+      letter-spacing: .2px;
+      text-shadow: 2px 2px 0 rgba(255,184,210,.75);
+    }
+
+    .icon-btn {
+      border: 2px solid var(--black);
+      border-radius: 4px;
+      box-shadow: 3px 3px 0 var(--pink);
+      transition: transform .18s, box-shadow .18s;
+    }
+
+    .icon-btn:hover {
+      transform: translate(-1px,-1px);
+      box-shadow: 4px 4px 0 var(--pink);
+    }
+
+    .btn {
+      border-radius: 4px;
+      box-shadow: 5px 5px 0 var(--pink-dark);
+      image-rendering: pixelated;
+    }
+
+    .btn:hover {
+      box-shadow: 7px 7px 0 var(--pink-dark);
+    }
+
+    .tiny-label, .eyebrow {
+      letter-spacing: 1.3px;
+    }
+
+    .home-title {
+      font-family: var(--pixel);
+      font-size: clamp(25px, 5.4vw, 48px);
+      letter-spacing: -1.2px;
+      line-height: 1.55;
+      text-shadow: 3px 3px 0 rgba(255,184,210,.8);
+    }
+
+    .home-title em {
+      color: var(--pink-dark);
+      font-style: normal;
+      text-shadow: 3px 3px 0 rgba(40,32,42,.08);
+    }
+
+    .home-subtitle {
+      color: #5f4d5b;
+      max-width: 520px;
+    }
+
+    .pixel-stage::before {
+      border: 3px dashed rgba(239,125,169,.35);
+      border-radius: 28%;
+      background: rgba(255,184,210,.23);
+    }
+
+    .character-bubble {
+      border-radius: 4px;
+      box-shadow: 5px 5px 0 var(--pink);
+    }
+
+    .story-card, .quiz-card, .result-card {
+      border: 2px solid var(--black);
+      border-radius: 5px;
+      box-shadow: 6px 6px 0 rgba(239,125,169,.55), var(--shadow);
+    }
+
+    .section-heading h2, .quiz-card h2, .result-card h1,
+    .gift-title, .finale-title {
+      text-wrap: balance;
+    }
+
+    .photo-grid {
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .polaroid {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      padding: 8px 8px 15px;
+      border: 2px solid var(--black);
+      border-radius: 3px;
+      box-shadow: 5px 5px 0 rgba(239,125,169,.45);
+      background: #fff;
+    }
+
+    .polaroid:nth-child(2n) {
+      transform: rotate(1.4deg) translateY(10px);
+    }
+
+    .polaroid:nth-child(3n) {
+      transform: rotate(-1.2deg) translateY(3px);
+    }
+
+    .polaroid img {
+      aspect-ratio: 4 / 4.3;
+      border: 1px solid #f2d7e3;
+    }
+
+    .polaroid figcaption {
+      font-size: 14px;
+      font-weight: 700;
+      color: #b34e7b;
+      padding: 13px 5px 6px;
+    }
+
+    .photo-story {
+      margin: 0;
+      padding: 0 7px 8px;
+      color: #675462;
+      font-size: 12px;
+      line-height: 1.8;
+      text-align: left;
+    }
+
+    .photo-moment {
+      display: inline-block;
+      margin: 8px 7px 2px;
+      padding: 5px 7px;
+      border: 1px dashed #e7a0bd;
+      background: #fff2f8;
+      color: #9b4a70;
+      font: 7px/1.8 var(--pixel);
+      text-transform: uppercase;
+    }
+
+    .answer-btn {
+      border-radius: 5px;
+      border-width: 2px;
+    }
+
+    .progress-track {
+      border: 1px solid #e4b7cb;
+      border-radius: 3px;
+    }
+
+    .progress-fill {
+      background: repeating-linear-gradient(
+        90deg, var(--pink-dark) 0 12px, #f5a8c6 12px 18px
+      );
+    }
+
+    .gift-card {
+      border-radius: 4px;
+      box-shadow: 7px 7px 0 var(--pink-dark), var(--shadow);
+    }
+
+    @media (max-width: 600px) {
+      .home-title {
+        font-size: clamp(20px, 6vw, 30px);
+        letter-spacing: -.5px;
+      }
+      .photo-grid {
+        gap: 14px;
+      }
+      .polaroid {
+        box-shadow: 3px 3px 0 rgba(239,125,169,.45);
+      }
+      .photo-story {
+        font-size: 11px;
+        line-height: 1.7;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       BAGIAN 11 — NAVIGASI DAN KONTROL MUSIK
+       ===================================================== -->
+  <header class="topbar">
+    <div class="brand">A LITTLE BOOK<br>OF US <span style="color:#d8ad59">✦</span></div>
+    <div class="top-actions">
+      <button class="icon-btn" id="musicButton" type="button" onclick="toggleMusic()">♫ Music: Off</button>
+      <button class="icon-btn" type="button" onclick="openRestartModal()">↻ Replay</button>
+    </div>
+  </header>
+
+  <!-- =====================================================
+       BAGIAN 12 — HALAMAN HOME
+       ===================================================== -->
+  <main>
+    <section id="home" class="screen active">
+      <div class="wrap center">
+        <div class="tiny-label">✦ A SPECIAL LITTLE UNIVERSE ✦</div>
+
+        <h1 class="home-title">
+          Small Moments.<br>
+          <em>Big Love to Dedeee.</em>
+        </h1>
+
+        <p class="home-subtitle">
+          A tiny interactive book, made of little memories,
+          silly questions, and one very special person.
+        </p>
+
+        <div class="pixel-stage">
+          <span class="pixel-star star-a">✦</span>
+          <span class="pixel-star star-b">✧</span>
+          <span class="pixel-star star-c">✦</span>
+          <span class="pixel-star star-d">✧</span>
+
+          <div>
+            <div class="book-character" role="img" aria-label="Karakter buku ajaib">
+              <div class="book-shadow"></div>
+              <div class="book-arm left"></div>
+              <div class="book-arm right"></div>
+              <div class="book-left"></div>
+              <div class="book-right"></div>
+              <div class="book-spine"></div>
+              <div class="book-crown">👑</div>
+              <div class="book-eye left"></div>
+              <div class="book-eye right"></div>
+              <div class="book-mouth"></div>
+              <div class="book-cheek left"></div>
+              <div class="book-cheek right"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="character-bubble" id="homeBubble">
+          Psst... buku kecil ini punya cerita tentang kamu!
+        </div>
+
+        <button class="btn" onclick="startExperience()">
+          Open Your Little Book <span>↗</span>
+        </button>
+
+        <div class="home-footer">Made with love, one pixel at a time ♡</div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         BAGIAN 13 — INTRODUCTION DAN CERITA KALIAN
+         ===================================================== -->
+    <section id="intro" class="screen has-topbar">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">CHAPTER 01 · THE BEGINNING</div>
+          <h2 class="serif">Every story starts<br>with a little something.</h2>
+          <div class="gold-line"></div>
+          <p>Dan cerita ini dimulai dari hal-hal kecil yang ternyata berarti besar.</p>
+        </div>
+
+        <article class="story-card">
+          <p>
+            Lucu ya, bagaimana seseorang yang awalnya hanya hadir di layar
+            bisa perlahan menjadi seseorang yang begitu berarti?
+          </p>
+          <p>
+            Dari balasan dan like Instagram Story-nya dedeeee yang sederhana dedeee Haflah,
+            obrolan yang awalnya biasa saja, sampai akhirnya aku mulai
+            memperhatikan hal-hal kecil tentang kamu ;)
+          </p>
+          <p>
+            Cara kamu bercerita, suara kamu, senyum kamu, semangat kamu
+            saat menjalani sesuatu, pencapaian yang kamu usahakan,
+            dan mata kamu yang punya daya tariknya sendiri.
+          </p>
+          <p class="handwritten">
+            Somehow, the little things became my favorite things.
+          </p>
+        </article>
+
+        <div class="section-heading">
+          <div class="eyebrow">LITTLE PIECES OF US</div>
+          <h2 class="serif">A few pages from our story.</h2>
+          <p>Beberapa potongan kenangan yang ikut mengisi buku kecil ini.</p>
+        </div>
+
+        <!-- FOTO-FOTO GOOGLE DRIVE: Ganti ID jika ingin mengganti foto -->
+        <div class="photo-grid" id="photoGrid"></div>
+
+        <article class="story-card">
+          <p>
+            Aku masih ingat bagaimana semuanya terasa makin nyata ketika
+            aku akhirnya mengungkapkan bahwa kamu special to me.
+            Kalimat yang mungkin sederhana, tapi menyimpan banyak keberanian.
+          </p>
+          <p>
+            Lalu ada kunjungan pertama ke rumah kamu, sambutan hangat
+            keluargamu, perjalanan ke Kota Tua, dan momen ketika sebuah
+            cincin menjadi cara kecil untuk menyampaikan perasaanku.
+          </p>
+          <p>
+            Ada juga hal-hal random yang sekarang terasa seperti bahasa
+            rahasia kita sendiri: kebiasaan bilang kangen, ajakan
+            “ke BP yu sayanggggg”, jalan-jalan menikmati alam,
+            dan berbagai hal sederhana yang tidak perlu selalu terlihat
+            istimewa bagi orang lain.
+          </p>
+          <p class="handwritten">
+            The best memories aren't always planned.
+            Sometimes, they're just us being us.
+          </p>
+        </article>
+
+        <article class="story-card">
+          <p>
+            Aku tidak berharap kita selalu punya hari yang sempurna.
+            Aku hanya berharap kita terus belajar memahami satu sama lain,
+            bertumbuh, menjaga komunikasi, dan saling menguatkan saat
+            keadaan tidak mudah.
+          </p>
+          <p>
+            Terima kasih karena sudah menjadi dirimu sendiri, dan karena
+            aku bisa mengenal sisi-sisi kamu yang mungkin tidak semua orang
+            punya kesempatan untuk lihat.
+          </p>
+          <p class="handwritten">
+            And now... ready to test your memory? ♡
+          </p>
+        </article>
+
+        <div class="character-bubble">
+          Oke, waktunya kuis! Jangan protes kalau pertanyaannya random, ya.
+        </div>
+
+        <div class="story-next">
+          <button class="btn" onclick="beginQuiz()">Start the Little Quiz →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         BAGIAN 14 — QUIZ 7 PERTANYAAN
+         5 POIN UTAMA + 2 PERTANYAAN BONUS NON-SCORING
+         ===================================================== -->
+    <section id="quiz" class="screen has-topbar">
+      <div class="quiz-shell">
+        <div class="center" style="margin-bottom:25px">
+          <div class="eyebrow">CHAPTER 02 · MEMORY QUEST</div>
+          <h1 class="serif" style="font-size:clamp(35px,7vw,52px);margin:10px 0">
+            How well do you remember?
+          </h1>
+          <p class="muted">Tenang, salah juga boleh. Buku ini baik kok. Kadang-kadang.</p>
+        </div>
+
+        <div class="pixel-stage" style="min-height:180px;margin:0 auto 8px">
+          <span class="pixel-star star-a">✦</span>
+          <span class="pixel-star star-b">✧</span>
+          <div class="book-character" style="transform:scale(.76)">
+            <div class="book-left"></div>
+            <div class="book-right"></div>
+            <div class="book-spine"></div>
+            <div class="book-crown">👑</div>
+            <div class="book-eye left"></div>
+            <div class="book-eye right"></div>
+            <div class="book-mouth"></div>
+            <div class="book-cheek left"></div>
+            <div class="book-cheek right"></div>
+          </div>
+        </div>
+
+        <div class="character-bubble" id="quizBubble">
+          Aku sudah menyiapkan pertanyaan. Kamu sudah menyiapkan ingatan?
+        </div>
+
+        <div class="quiz-top">
+          <span id="questionCounter">QUESTION 01 / 07</span>
+          <span id="scoreCounter">SCORE: 0</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="quizProgress"></div>
+        </div>
+
+        <div class="quiz-card">
+          <div class="eyebrow" id="questionType">MEMORY CHECK</div>
+          <h2 id="questionText">Pertanyaan akan muncul di sini.</h2>
+          <div class="quiz-hint" id="questionHint"></div>
+          <div class="answer-list" id="answerList"></div>
+          <div class="quiz-feedback" id="quizFeedback" aria-live="polite">
+            Pilih jawaban yang menurut kamu paling tepat.
+          </div>
+          <div class="quiz-controls">
+            <button class="btn small hidden" id="nextQuestionButton" onclick="nextQuestion()">
+              Next Question →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         BAGIAN 15 — HASIL KUIS
+         ===================================================== -->
+    <section id="results" class="screen has-topbar">
+      <div class="result-card">
+        <div class="eyebrow">CHAPTER 03 · YOUR LITTLE RESULT</div>
+        <div class="pixel-stage" style="min-height:170px;margin:0 auto">
+          <div class="book-character" style="transform:scale(.8)">
+            <div class="book-left"></div>
+            <div class="book-right"></div>
+            <div class="book-spine"></div>
+            <div class="book-crown">👑</div>
+            <div class="book-eye left"></div>
+            <div class="book-eye right"></div>
+            <div class="book-mouth"></div>
+            <div class="book-cheek left"></div>
+            <div class="book-cheek right"></div>
+          </div>
+        </div>
+
+        <h1 class="serif" style="font-size:clamp(34px,7vw,52px);margin:0">
+          Look at you!
+        </h1>
+        <div class="result-number"><span id="finalScore">0</span><span style="font-size:30px;color:#b9a6b0">/5</span></div>
+        <div class="eyebrow">BONUS QUESTIONS ARE JUST FOR FUN</div>
+        <p class="result-message" id="resultMessage"></p>
+
+        <div class="character-bubble" id="resultBubble">
+          Nilai bukan ukuran seberapa berharganya kamu. Ini cuma kuis kecil!
+        </div>
+
+        <button class="btn gold" onclick="revealGift()">Open Your Little Gift 🎁</button>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         BAGIAN 16 — GIFT REVEAL DAN VOUCHER
+         ===================================================== -->
+    <section id="gift" class="screen has-topbar">
+      <div class="wrap">
+        <div class="section-heading">
+          <div class="eyebrow">CHAPTER 04 · A LITTLE SURPRISE</div>
+          <h2 class="serif">One more thing, for you.</h2>
+          <p>Hadiah ini tidak bergantung pada nilai kuis kamu. Tentu saja!</p>
+        </div>
+
+        <div class="gift-card">
+          <div class="gift-banner">
+            <div class="pixel">✦ YOUR PERSONAL BOOK VOUCHER ✦</div>
+          </div>
+
+          <div class="gift-body">
+            <div style="font-size:46px;margin-bottom:10px">📚 💌 ✨</div>
+            <div class="eyebrow">A LITTLE PROMISE</div>
+            <h1 class="gift-title">One Book,<br>One Date.</h1>
+
+            <p style="line-height:1.9;color:#756474">
+              Voucher untuk satu buku pilihanmu, yang nanti akan kita beli
+              bersama di Gramedia.
+            </p>
+
+            <div class="voucher">
+              <div class="eyebrow">VOUCHER CODE</div>
+              <p class="voucher-code" id="voucherCode">28102005</p>
+              <button class="btn small light" onclick="copyVoucher()">Copy Voucher Code</button>
+            </div>
+
+            <p class="gift-note">
+              “Pick the book you want. I'll be happy to be there
+              while you find your next favorite story.”
+            </p>
+
+            <p class="muted" style="font-size:12px;line-height:1.8">
+              Personal promise ♡ One book of your choice, bought together.
+            </p>
+
+            <div class="gold-line"></div>
+            <button class="btn" onclick="goToFinale()">One Last Page →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         BAGIAN 17 — FINALE / UCAPAN ULANG TAHUN
+         ===================================================== -->
+    <section id="finale" class="screen has-topbar">
+      <div class="finale-card wrap">
+        <div class="eyebrow">A LITTLE WISH FOR YOUR 21ST</div>
+
+        <div class="pixel-stage">
+          <span class="pixel-star star-a">✦</span>
+          <span class="pixel-star star-b">✧</span>
+          <span class="pixel-star star-c">✦</span>
+          <span class="pixel-star star-d">✧</span>
+          <div class="book-character">
+            <div class="book-left"></div>
+            <div class="book-right"></div>
+            <div class="book-spine"></div>
+            <div class="book-crown">👑</div>
+            <div class="book-eye left"></div>
+            <div class="book-eye right"></div>
+            <div class="book-mouth"></div>
+            <div class="book-cheek left"></div>
+            <div class="book-cheek right"></div>
+          </div>
+        </div>
+
+        <div class="eyebrow">28 OCTOBER 2026</div>
+        <h1 class="finale-title">Happy 21st,<br><em style="color:#ef7da9">Dedeee.</em></h1>
+
+        <div class="gold-line"></div>
+
+        <p class="finale-text">
+          Semoga di usia yang baru ini kamu selalu diberi kesehatan,
+          hati yang tenang, langkah yang dimudahkan, dan keberanian untuk
+          terus mengejar hal-hal yang kamu impikan.
+          <br><br>
+          Semoga kamu semakin mengenal dirimu sendiri, semakin dewasa
+          menghadapi keadaan, dan tetap punya semangat untuk melewati
+          hari-hari yang tidak selalu mudah.
+          <br><br>
+          Aku berharap kita bisa terus belajar, bertumbuh, memperbaiki diri,
+          saling mendukung, dan merayakan banyak hal kecil bersama.
+          Tidak harus selalu sempurna. Cukup terus berusaha untuk saling
+          memahami dan menjaga apa yang kita punya.
+          <br><br>
+          Thank you for being part of my story.
+          I hope life gives you a thousand reasons to smile.
+        </p>
+
+        <div class="finale-signature">With love, always. ♡</div>
+
+        <button class="btn light" onclick="replayStory()">Read Our Little Book Again ↻</button>
+        <p class="footer-note">
+          This little universe was made just for you.<br>
+          Small Moments. Big Love. — 2026
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================
+       BAGIAN 18 — MODAL PASSWORD
+       Password default: 28102005
+       ===================================================== -->
+  <div class="modal" id="passwordModal" role="dialog" aria-modal="true" aria-labelledby="passwordTitle">
+    <div class="modal-box">
+      <div style="font-size:38px">🔐</div>
+      <div class="eyebrow">A TINY SECRET</div>
+      <h2 class="serif" id="passwordTitle" style="font-size:29px;margin:12px 0">
+        Just for you.
+      </h2>
+      <p class="muted" style="font-size:13px;line-height:1.8">
+        Masukkan tanggal spesial untuk membuka kembali buku ini.
+      </p>
+      <form onsubmit="return submitPassword(event)">
+        <input id="passwordInput" type="password" inputmode="numeric"
+          autocomplete="off" maxlength="8" placeholder="DDMMYYYY" aria-label="Password">
+        <div class="modal-error" id="passwordError" aria-live="polite"></div>
+        <button class="btn" type="submit" style="width:100%">Unlock the Book ♡</button>
+      </form>
+      <button class="btn small light" style="margin-top:12px" onclick="closePasswordModal()">Cancel</button>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       BAGIAN 19 — MODAL FOTO LIGHTBOX
+       ===================================================== -->
+  <div class="modal" id="photoModal" role="dialog" aria-modal="true" aria-label="Foto kenangan">
+    <div class="photo-modal-content">
+      <img id="expandedPhoto" src="" alt="Foto kenangan">
+      <button class="btn photo-close" onclick="closePhoto()">Close Photo ✕</button>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       BAGIAN 20 — MODAL REPLAY
+       ===================================================== -->
+  <div class="modal" id="restartModal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div style="font-size:35px">📖</div>
+      <h2 class="serif" style="font-size:27px">Start over?</h2>
+      <p class="muted" style="line-height:1.8;font-size:13px">
+        Mau membaca dari halaman pertama lagi?
+      </p>
+      <button class="btn" onclick="confirmReplay()">Yes, replay it!</button>
+      <button class="btn small light" style="margin-top:12px" onclick="closeRestartModal()">Not yet</button>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       BAGIAN 20B — YOUTUBE BACKGROUND MUSIC
+       Satu lagu untuk seluruh website; tidak dibuat ulang saat navigasi.
+       Pemutaran dimulai setelah tombol pembuka Home ditekan.
+       ===================================================== -->
+  <div id="youtubeMusic" aria-hidden="true"
+       style="position:fixed;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;bottom:0;left:0;">
+    <iframe
+      id="musicFrame"
+      width="1"
+      height="1"
+      src="https://www.youtube.com/embed/NjEKu80l5mU?enablejsapi=1&autoplay=0&controls=0&loop=1&playlist=NjEKu80l5mU"
+      title="A Little Book of Us background music"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      referrerpolicy="strict-origin-when-cross-origin">
+    </iframe>
+  </div>
+
+  <!-- =====================================================
+       BAGIAN 21 — JAVASCRIPT: KONFIGURASI DAN FOTO
+       ===================================================== -->
+  <script>
+    "use strict";
+
+    // Ubah konfigurasi ini jika ingin mengganti detail personal.
+    const CONFIG = {
+      recipient: "Dedeee",
+      birthday: "28 October 2026",
+      password: "28102005",
+      voucherCode: "28102005",
+      musicEnabledByDefault: false
+    };
+
+    // Tujuh file foto yang sebelumnya kamu kirim.
+    // Pastikan setiap file Google Drive bisa dilihat oleh pemegang link.
+    const PHOTOS = [
+      {
+        id: "1vJ1GzQuiorbtJ6nmQ5e5Kt-_MkMtUNGa",
+        moment: "THE BEGINNING",
+        caption: "It started with a little reply ♡",
+        story: "Awalnya cuma balasan dan like Instagram Story setelah Haflah. Nggak ada yang benar-benar tahu obrolan sederhana itu akan membawa kita sejauh ini. Kadang, hal besar memang datang tanpa pengumuman."
+      },
+      {
+        id: "1nP8P_B41BoNNa4dP7mEjwa0K-q-s0kPJ",
+        moment: "THE LITTLE THINGS",
+        caption: "The details I remember",
+        story: "Aku mulai menyukai hal-hal kecil tentang kamu: cara kamu bercerita, suara dan senyummu, semangatmu saat mengejar sesuatu, pencapaian yang kamu usahakan, sampai tatapan matamu. Bukan satu hal saja—semuanya pelan-pelan terasa berarti."
+      },
+      {
+        id: "1zD_CejPy9YKYtcjKeWrjMvIITx-Qe85h",
+        moment: "A LITTLE CONFESSION",
+        caption: "You were special to me",
+        story: "Ada keberanian yang harus dikumpulkan untuk mengatakan, “you special to me.” Kalimatnya sederhana, tapi buatku itu cara jujur untuk memberi tahu bahwa kamu sudah punya tempat yang berbeda di pikiranku."
+      },
+      {
+        id: "1JKoRiijgSlT9MUUKYiROGfY098z7eQBN",
+        moment: "A WARM WELCOME",
+        caption: "A day that felt closer",
+        story: "Kunjungan pertamaku ke rumahmu menjadi salah satu momen yang terasa hangat. Bertemu keluargamu membuat semuanya terasa lebih nyata—bukan cuma tentang kita berdua, tetapi juga tentang orang-orang dan kehidupan yang membentuk dirimu."
+      },
+      {
+        id: "1Lra5r-EYlBtyUjzulkFgYN1L49NQXKCh",
+        moment: "KOTA TUA",
+        caption: "A ring, a memory, us",
+        story: "Perjalanan ke Kota Tua menyimpan kenangan yang tidak ingin kulupakan: momen saat aku memberikan cincin untuk pertama kalinya. Bukan soal seberapa besar bendanya, seberapa mahal harganya, tetapi tentang perasaan dan maksud kecil yang ingin kusampaikan saat itu."
+      },
+      {
+        id: "1TLfd55fjWvoyDGMmjEkQrrTP2fkdaO9a",
+        moment: "OUR RANDOM LANGUAGE",
+        caption: "Ke BP yu sayanggggg",
+        story: "Cerita kita juga penuh hal random: kebiasaan bilang kangen, ajakan “ke BP yu sayangggg”, jalan-jalan menikmati alam, dan tawa dari hal yang mungkin orang lain nggak mengerti. Justru hal-hal seperti ini yang terasa khas kita."
+      },
+      {
+        id: "17vDxb7euhDZcy4-3IvRb5ftLEN-btP5v",
+        moment: "GROWING TOGETHER",
+        caption: "More pages to write",
+        story: "Dari menjalani hal-hal bersama sampai merintis bisnis, aku berharap kita terus belajar dan bertumbuh. Aku bersyukur kamu bisa menerima diriku dalam berbagai keadaan. Semoga kita tetap saling mendukung, memperbaiki diri, dan menulis banyak halaman baru bersama."
+      }
+    ];
+
+    // Kuis: lima pertanyaan bernilai poin dan dua pertanyaan bonus.
+    // Silakan ubah pilihan jawaban bila ada detail yang perlu disesuaikan.
+    const QUESTIONS = [
+      {
+        type: "MEMORY CHECK · 01",
+        question: "Dari mana salah satu awal cerita kita?",
+        hint: "Coba ingat lagi awal obrolan kita.",
+        answers: [
+          "Balasan Instagram Story Haflah dedeee",
+          "Bertemu di sebuah konser",
+          "Berkenalan lewat game online",
+          "Dikenalkan teman di kafe"
+        ],
+        correct: 0,
+        score: true,
+        correctText: "Yesss! Dari hal kecil di Instagram, ternyata bisa sejauh ini.",
+        wrongText: "Belum tepat. Ingat lagi obrolan sederhana setelah Haflah dedeee itu.",
+        retryHint: "Petunjuk: awalnya lewat Instagram Story."
+      },
+      {
+        type: "MEMORY CHECK · 02",
+        question: "Hal-hal apa yang mulai menarik perhatianku dari kamu?",
+        hint: "Jawabannya berkaitan dengan banyak hal kecil tentang dirimu.",
+        answers: [
+          "Hanya penampilanmu",
+          "Suara, senyum, semangat, pencapaian, dan hal-hal kecil tentangmu",
+          "Karena kamu selalu setuju denganku",
+          "Karena kita punya semua hobi yang beda"
+        ],
+        correct: 1,
+        score: true,
+        correctText: "Benar! Aku menyukai banyak sisi dari dirimu, bukan satu hal saja.",
+        wrongText: "Hmm, jawabannya lebih luas dari itu.",
+        retryHint: "Petunjuk: cara kamu bercerita, senyum, semangat, dan banyak hal lain."
+      },
+      {
+        type: "MEMORY CHECK · 03",
+        question: "Apa kalimat yang pernah kusampaikan saat mengungkapkan perasaan?",
+        hint: "Ada satu frasa bahasa Inggris yang sederhana.",
+        answers: [
+          "I will never leave this city",
+          "You are my only friend",
+          "You special to me",
+          "Let's be strangers again"
+        ],
+        correct: 2,
+        score: true,
+        correctText: "Yap! Kalimat sederhana yang punya arti besar.",
+        wrongText: "Belum, coba ingat kalimat yang pernah kita bicarakan.",
+        retryHint: "Petunjuk: ada kata 'special' di dalamnya."
+      },
+      {
+        type: "MEMORY CHECK · 04",
+        question: "Perjalanan mana yang punya kenangan spesial tentang cincin?",
+        hint: "Kita pernah pergi ke tempat bersejarah di Jakarta.",
+        answers: [
+          "Kota Tua",
+          "Taman Mini",
+          "Ancol",
+          "Kebun Raya Bogor"
+        ],
+        correct: 0,
+        score: true,
+        correctText: "Betul! Kota Tua punya satu kenangan yang istimewa.",
+        wrongText: "Belum tepat. Ingat perjalanan kita ke tempat bersejarah itu.",
+        retryHint: "Petunjuk: kawasan bersejarah di Jakarta."
+      },
+      {
+        type: "MEMORY CHECK · 05",
+        question: "Apa salah satu kebiasaan kecil yang menjadi bagian dari cerita kita?",
+        hint: "Ada ungkapan yang sering muncul saat sedang berjauhan.",
+        answers: [
+          "Selalu menghitung jumlah langkah",
+          "Selalu berbicara dalam bahasa formal",
+          "Selalu berlomba memasak",
+          "kita selalu kangen"
+        ],
+        correct: 3,
+        score: true,
+        correctText: "Hehe, iya. Kadang kata sederhana sudah cukup untuk menyampaikan perasaan kita yang rindu berat.",
+        wrongText: "Coba lagi. Ini kebiasaan yang berkaitan dengan perasaan.",
+        retryHint: "Petunjuk: kata yang sering diucapkan saat merindukan seseorang."
+      },
+      {
+        type: "BONUS · JUST FOR FUN",
+        question: "Kalau ada ajakan random, mana yang terdengar paling familiar?",
+        hint: "Kata-kata ini mungkin mengingatkanmu pada obrolan kita.",
+        answers: [
+          "Ke BP yu sayanggggggggggggggggg",
+          "Ayo rapat jam tujuh",
+          "Mari membuat laporan",
+          "Jangan lupa belanja bulanan"
+        ],
+        correct: 0,
+        score: false,
+        correctText: "HAHAHA, ke BP yu heheheee!",
+        wrongText: "Buku ini sedang menahan tawa. Coba sekali lagi.",
+        retryHint: "Petunjuk: ada nama tempat dan 'heheheee'."
+      },
+      {
+        type: "BONUS · A LITTLE WISH",
+        question: "Apa yang paling ingin kita lakukan bersama ke depannya?",
+        hint: "Tidak ada jawaban yang harus sempurna untuk pertanyaan ini.",
+        answers: [
+          "Selalu menjadi benar dalam setiap perdebatan",
+          "Belajar, bertumbuh, saling mendukung, bangun rumah, beli mobil, dan membuat kenangan",
+          "Tidak pernah menghadapi masalah",
+          "Berhenti mencoba hal baru"
+        ],
+        correct: 1,
+        score: false,
+        correctText: "That's the spirit! Semoga kita terus belajar dan bertumbuh bersama.",
+        wrongText: "Tidak apa-apa. Pertanyaan ini lebih tentang harapan daripada nilai.",
+        retryHint: "Petunjuk: saling mendukung dan bertumbuh bersama."
+      }
+    ];
+
+    // =====================================================
+    // BAGIAN 22 — STATE DAN PENYIMPANAN PROGRES
+    // =====================================================
+
+    const STORAGE_KEY = "littleBookOfUs_v1";
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answersLocked = false;
+    let musicOn = false;
+    let audioContext = null;
+    let musicTimer = null;
+    let musicStep = 0;
+
+    function loadProgress() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function saveProgress(extra = {}) {
+      try {
+        const old = loadProgress();
+        const data = {
+          ...old,
+          currentQuestion,
+          score,
+          updatedAt: new Date().toISOString(),
+          ...extra
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      } catch (error) {
+        // Website tetap berjalan jika penyimpanan browser tidak tersedia.
+      }
+    }
+
+    function restoreProgress() {
+      const saved = loadProgress();
+      currentQuestion = Number.isInteger(saved.currentQuestion)
+        ? Math.min(Math.max(saved.currentQuestion, 0), QUESTIONS.length - 1)
+        : 0;
+      score = Number.isInteger(saved.score) ? Math.max(saved.score, 0) : 0;
+    }
+
+    // =====================================================
+    // BAGIAN 23 — NAVIGASI HALAMAN
+    // =====================================================
+
+    function showScreen(id) {
+      document.querySelectorAll(".screen").forEach(screen => {
+        screen.classList.toggle("active", screen.id === id);
+      });
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      saveProgress({ lastScreen: id });
+    }
+
+    function startExperience() {
+      // Musik dimulai sebagai respons langsung dari klik tombol Home.
+      startBackgroundMusic();
+      showScreen("intro");
+      sparkleBurst(10);
+    }
+
+    function beginQuiz() {
+      currentQuestion = 0;
+      score = 0;
+      saveProgress({ quizStarted: true, quizComplete: false });
+      renderQuestion();
+      showScreen("quiz");
+    }
+
+    function revealGift() {
+      showScreen("gift");
+      confettiBurst();
+      saveProgress({ giftOpened: true });
+    }
+
+    function goToFinale() {
+      showScreen("finale");
+      confettiBurst();
+      saveProgress({ finaleSeen: true });
+    }
+
+    function replayStory() {
+      currentQuestion = 0;
+      score = 0;
+      saveProgress({
+        currentQuestion: 0,
+        score: 0,
+        quizComplete: false,
+        giftOpened: false,
+        finaleSeen: false
+      });
+      showScreen("home");
+    }
+
+    // =====================================================
+    // BAGIAN 24 — RENDER FOTO SCRAPBOOK
+    // =====================================================
+
+    function driveImageUrl(id) {
+      return "https://drive.google.com/thumbnail?id=" +
+        encodeURIComponent(id) + "&sz=w1000";
+    }
+
+    function renderPhotos() {
+      const grid = document.getElementById("photoGrid");
+      grid.innerHTML = "";
+
+      PHOTOS.forEach((photo, index) => {
+        const figure = document.createElement("figure");
+        figure.className = "polaroid";
+
+        const img = document.createElement("img");
+        img.src = driveImageUrl(photo.id);
+        img.alt = "Foto kenangan " + (index + 1);
+        img.loading = "lazy";
+        img.addEventListener("click", () => openPhoto(img.src));
+
+        img.addEventListener("error", () => {
+          img.alt = "Foto tidak dapat dimuat. Periksa izin Google Drive.";
+          img.style.objectFit = "contain";
+          img.style.padding = "12px";
+          img.style.cursor = "default";
+          img.src = "data:image/svg+xml;charset=UTF-8," +
+            encodeURIComponent(
+              '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="360">' +
+              '<rect width="100%" height="100%" fill="#fff0f5"/>' +
+              '<text x="50%" y="45%" text-anchor="middle" font-size="42">♡</text>' +
+              '<text x="50%" y="58%" text-anchor="middle" font-family="Arial" font-size="14" fill="#8c7887">Foto belum tersedia</text>' +
+              '</svg>'
+            );
+        });
+
+        const moment = document.createElement("div");
+        moment.className = "photo-moment";
+        moment.textContent = photo.moment || ("MEMORY " + String(index + 1).padStart(2, "0"));
+
+        const caption = document.createElement("figcaption");
+        caption.textContent = photo.caption;
+
+        const story = document.createElement("p");
+        story.className = "photo-story";
+        story.textContent = photo.story || "Satu lagi potongan kecil dari cerita kita.";
+
+        figure.appendChild(img);
+        figure.appendChild(moment);
+        figure.appendChild(caption);
+        figure.appendChild(story);
+        grid.appendChild(figure);
+      });
+    }
+
+    function openPhoto(src) {
+      const modal = document.getElementById("photoModal");
+      document.getElementById("expandedPhoto").src = src;
+      modal.classList.add("open");
+    }
+
+    function closePhoto() {
+      document.getElementById("photoModal").classList.remove("open");
+    }
+
+    // =====================================================
+    // BAGIAN 25 — LOGIKA KUIS DAN PENGHITUNGAN NILAI
+    // =====================================================
+
+    function renderQuestion() {
+      const q = QUESTIONS[currentQuestion];
+      answersLocked = false;
+
+      document.getElementById("questionCounter").textContent =
+        "QUESTION " + String(currentQuestion + 1).padStart(2, "0") +
+        " / " + String(QUESTIONS.length).padStart(2, "0");
+
+      document.getElementById("scoreCounter").textContent = "SCORE: " + score;
+      document.getElementById("quizProgress").style.width =
+        (currentQuestion / QUESTIONS.length * 100) + "%";
+
+      document.getElementById("questionType").textContent = q.type;
+      document.getElementById("questionText").textContent = q.question;
+      document.getElementById("questionHint").textContent = q.hint;
+      document.getElementById("quizFeedback").textContent =
+        "Pilih jawaban yang menurut kamu paling tepat.";
+      document.getElementById("nextQuestionButton").classList.add("hidden");
+
+      const list = document.getElementById("answerList");
+      list.innerHTML = "";
+
+      q.answers.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "answer-btn";
+
+        const letter = document.createElement("span");
+        letter.className = "answer-letter";
+        letter.textContent = String.fromCharCode(65 + index);
+
+        const text = document.createElement("span");
+        text.textContent = answer;
+
+        button.appendChild(letter);
+        button.appendChild(text);
+        button.addEventListener("click", () => checkAnswer(index, button));
+
+        list.appendChild(button);
+      });
+
+      document.getElementById("quizBubble").textContent =
+        currentQuestion === 5
+          ? "BONUS TIME! Ini cuma buat seru-seruan, ya."
+          : currentQuestion === 6
+            ? "Pertanyaan terakhir. Jawab dari hati, bukan dari Google."
+            : "Ayo, coba ingat lagi. Aku percaya kamu bisa!";
+    }
+
+    function checkAnswer(selectedIndex, selectedButton) {
+      if (answersLocked) return;
+
+      const q = QUESTIONS[currentQuestion];
+      const feedback = document.getElementById("quizFeedback");
+      const allButtons = [...document.querySelectorAll(".answer-btn")];
+
+      if (selectedIndex !== q.correct) {
+        selectedButton.classList.add("wrong");
+        feedback.textContent = q.wrongText + " " + q.retryHint;
+        document.getElementById("quizBubble").textContent =
+          "Belum tepat! Coba lagi, aku kasih petunjuk. ♡";
+        return;
+      }
+
+      answersLocked = true;
+      selectedButton.classList.add("correct");
+
+      if (q.score) {
+        score++;
+      }
+
+      allButtons.forEach(button => {
+        button.disabled = true;
+      });
+
+      feedback.textContent = q.correctText;
+      document.getElementById("scoreCounter").textContent = "SCORE: " + score;
+      document.getElementById("quizProgress").style.width =
+        ((currentQuestion + 1) / QUESTIONS.length * 100) + "%";
+
+      document.getElementById("nextQuestionButton").textContent =
+        currentQuestion === QUESTIONS.length - 1
+          ? "See My Result ✨"
+          : "Next Question →";
+
+      document.getElementById("nextQuestionButton").classList.remove("hidden");
+
+      saveProgress({
+        currentQuestion,
+        score,
+        questionAnswered: currentQuestion,
+        quizComplete: currentQuestion === QUESTIONS.length - 1
+      });
+    }
+
+    function nextQuestion() {
+      if (!answersLocked) return;
+
+      if (currentQuestion < QUESTIONS.length - 1) {
+        currentQuestion++;
+        saveProgress({ currentQuestion, score });
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function showResults() {
+      document.getElementById("finalScore").textContent = score;
+
+      let message = "";
+      let bubble = "";
+
+      if (score === 5) {
+        message = "Perfect score! Ingatan kamu hebat. Tapi jangan sombong dulu, ya. Masih banyak cerita yang belum masuk buku ini.";
+        bubble = "SHE KNOWS THE LORE. THE BOOK IS IMPRESSED.";
+      } else if (score >= 3) {
+        message = "Look at you! Banyak kenangan yang masih kamu ingat. Semoga masih ada banyak halaman baru yang bisa kita tulis bersama.";
+        bubble = "Wah, lumayan jago! Buku ini mengangguk bangga.";
+      } else {
+        message = "Tidak apa-apa kalau ada yang terlupa. Kuis ini hanya permainan kecil, bukan ukuran perasaan. Kita masih bisa membuat banyak kenangan baru.";
+        bubble = "Tenang, kamu tetap dapat hadiah. Aku tidak sejahat itu.";
+      }
+
+      document.getElementById("resultMessage").textContent = message;
+      document.getElementById("resultBubble").textContent = bubble;
+
+      saveProgress({ currentQuestion, score, quizComplete: true });
+      showScreen("results");
+      sparkleBurst(20);
+    }
+
+    // =====================================================
+    // BAGIAN 26 — VOUCHER DAN SALIN KODE
+    // =====================================================
+
+    function copyVoucher() {
+      const code = CONFIG.voucherCode;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(() => {
+          alert("Voucher code copied: " + code);
+        }).catch(() => fallbackCopy(code));
+      } else {
+        fallbackCopy(code);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const input = document.createElement("textarea");
+      input.value = text;
+      input.style.position = "fixed";
+      input.style.opacity = "0";
+      document.body.appendChild(input);
+      input.select();
+
+      try {
+        document.execCommand("copy");
+        alert("Voucher code: " + text);
+      } catch (error) {
+        alert("Voucher code: " + text);
+      }
+
+      input.remove();
+    }
+
+    // =====================================================
+    // BAGIAN 27 — PASSWORD DAN REPLAY
+    // Password ini adalah pengunci ringan di sisi browser,
+    // bukan sistem keamanan untuk informasi rahasia.
+    // =====================================================
+
+    function openRestartModal() {
+      document.getElementById("restartModal").classList.add("open");
+    }
+
+    function closeRestartModal() {
+      document.getElementById("restartModal").classList.remove("open");
+    }
+
+    function confirmReplay() {
+      closeRestartModal();
+      document.getElementById("passwordModal").classList.add("open");
+      document.getElementById("passwordInput").value = "";
+      document.getElementById("passwordError").textContent = "";
+      setTimeout(() => document.getElementById("passwordInput").focus(), 100);
+    }
+
+    function closePasswordModal() {
+      document.getElementById("passwordModal").classList.remove("open");
+    }
+
+    function submitPassword(event) {
+      event.preventDefault();
+
+      const entered = document.getElementById("passwordInput").value.trim();
+      const error = document.getElementById("passwordError");
+
+      if (entered !== CONFIG.password) {
+        error.textContent = "Hmm, password belum tepat. Coba tanggal spesialnya.";
+        return false;
+      }
+
+      closePasswordModal();
+      replayStory();
+      return false;
+    }
+
+    // =====================================================
+    // BAGIAN 28 — MUSIK YOUTUBE
+    // Musik mulai setelah tombol Home ditekan. Pemutar yang sama
+    // dipakai di semua halaman sehingga lagu tidak ter-reset.
+    // =====================================================
+
+    function sendYouTubeCommand(command) {
+      const frame = document.getElementById("musicFrame");
+      if (!frame || !frame.contentWindow) return;
+
+      frame.contentWindow.postMessage(
+        JSON.stringify({
+          event: "command",
+          func: command,
+          args: []
+        }),
+        "https://www.youtube.com"
+      );
+    }
+
+    function startBackgroundMusic() {
+      // Sedikit jeda memberi waktu iframe selesai memuat.
+      sendYouTubeCommand("playVideo");
+      window.setTimeout(() => sendYouTubeCommand("playVideo"), 300);
+      window.setTimeout(() => sendYouTubeCommand("playVideo"), 900);
+
+      musicOn = true;
+      const button = document.getElementById("musicButton");
+      if (button) button.textContent = "♫ Music: On";
+    }
+
+    function toggleMusic() {
+      if (musicOn) {
+        sendYouTubeCommand("pauseVideo");
+        musicOn = false;
+        document.getElementById("musicButton").textContent = "♫ Music: Off";
+      } else {
+        startBackgroundMusic();
+      }
+    }
+
+    // =====================================================
+    // BAGIAN 29 — EFEK BINTANG DAN CONFETTI
+    // =====================================================
+
+    function sparkleBurst(count = 12) {
+      const symbols = ["✦", "✧", "♡", "·"];
+
+      for (let i = 0; i < count; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+        sparkle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        sparkle.style.left = Math.random() * 100 + "vw";
+        sparkle.style.bottom = "-20px";
+        sparkle.style.fontSize = (12 + Math.random() * 20) + "px";
+        sparkle.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(sparkle);
+
+        window.setTimeout(() => sparkle.remove(), 6500);
+      }
+    }
+
+    function confettiBurst() {
+      const symbols = ["✦", "♡", "✧", "▪", "★"];
+      const colors = ["#ef7da9", "#d8ad59", "#ffb8d2", "#fff", "#28202a"];
+
+      for (let i = 0; i < 48; i++) {
+        const piece = document.createElement("span");
+        piece.className = "confetti";
+        piece.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        piece.style.left = Math.random() * 100 + "vw";
+        piece.style.color = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.fontSize = (10 + Math.random() * 17) + "px";
+        piece.style.animationDuration = (2.2 + Math.random() * 2.2) + "s";
+        piece.style.animationDelay = (Math.random() * .6) + "s";
+        document.body.appendChild(piece);
+
+        window.setTimeout(() => piece.remove(), 5200);
+      }
+    }
+
+    // =====================================================
+    // BAGIAN 30 — EVENT KEYBOARD, MODAL, DAN INISIALISASI
+    // =====================================================
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        closePhoto();
+        closeRestartModal();
+        closePasswordModal();
+      }
+    });
+
+    document.getElementById("photoModal").addEventListener("click", event => {
+      if (event.target.id === "photoModal") closePhoto();
+    });
+
+    document.getElementById("restartModal").addEventListener("click", event => {
+      if (event.target.id === "restartModal") closeRestartModal();
+    });
+
+    document.getElementById("passwordModal").addEventListener("click", event => {
+      if (event.target.id === "passwordModal") closePasswordModal();
+    });
+
+    function init() {
+      renderPhotos();
+      restoreProgress();
+
+      // Progres kuis disimpan di browser. Pengunjung tetap mulai
+      // dari halaman pembuka ketika membuka link baru.
+      // Tombol Replay dapat mengatur ulang pengalaman.
+      sparkleBurst(8);
+    }
+
+    init();
+  </script>
+</body>
+</html>
